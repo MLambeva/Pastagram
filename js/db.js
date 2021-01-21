@@ -1,6 +1,3 @@
-
-/* */
-// Your web app's Firebase configuration
 (() => {
 
     const initDatabase = () => {
@@ -66,7 +63,6 @@
             const errorCode = error.code;
             let errorMessage;
 
-            // Here we analyze the code and set custom error message (in bulgarian) just for the sake of the exersice
             switch (errorCode) {
                 case 'auth/weak-password':
                     {

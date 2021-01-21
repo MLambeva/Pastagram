@@ -195,7 +195,7 @@ body {
 	padding: 0;
 }
 
-.menu-items>li {
+.menu-items * {
 	font-weight: bold;
 	margin-right: 1rem;
 }
@@ -203,6 +203,15 @@ body {
 .menu-link {
 	color: black;
 	text-decoration: none;
+}
+
+.menu-button {
+	border : 0;
+	font-family: 'Tahoma', sans-serif;
+	background: #FCFFEB;
+	border-radius: 10px;
+	padding: 0.2em 0.4em 0.2em 0.4em;
+	font-size: 1.1rem;
 }
 
 #pastas {
@@ -286,12 +295,13 @@ body {
 
 /*-----------------------------Upload pasta---------------------*/
 
-#title-write {
+.upload-input {
 	width: 50%;
 	align-self: center;
 	font-size: 2rem;
+	margin-bottom: 2rem;
 }
 
-#title-write:focus {
+.upload-input:focus {
 	outline: 0;
 }

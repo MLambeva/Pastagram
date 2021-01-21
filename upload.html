@@ -20,23 +20,21 @@
             <li><a class="menu-link" href="upload.html">Upload</a></li>
         </ul>
         <a class="title" href="index.html">Pastagram</a>
-        <ul class="menu-items">
-            <li><a class="menu-link" href="login.html">Log in</a></li>
-            <li><a class="menu-link" href="register.html">Register</a></li>
+        <ul class="menu-items" id="menu-buttons">
         </ul>
     </div>
 
     <div class="main">
         <section class="canvas">
+            <h2 class="page-title">Upload</h2>
 
-            <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)"
-                style="display: none;">
-            <p><label for="file" style="cursor: pointer;">Upload Image</label></p>
-            <div><img id="output" style="max-width: 50%; display: none;" /></div>
+            <input class = "upload-input" name="image" id="imageURL" placeholder="Paste image URL!"></input>
+            
+            <!--<div><img id="output" style="max-width: 50%; display: none;" /></div>-->
 
-            <textarea id="title-write" placeholder="Name your pasta creation!"></textarea>
+            <input class = "upload-input" id="title-write" placeholder="Name your pasta creation!"></input>
 
-            <button type="submit" class="auth-button">Post!</button>
+            <button type="submit" class="auth-button">Submit Pasta!</button>
         </section>
     </div>
 
@@ -46,6 +44,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
     <script src="js/db.js"></script>
     <script src="js/controller.js"></script>
+    <script src ="js/images.js"></script>
 </body>
 
 </html>

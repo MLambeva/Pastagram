@@ -1,7 +1,6 @@
 (() => {
 	const registerForm = document.getElementById('register-form');
 	const loginForm = document.getElementById('login-form');
-	const logoutBtn = document.getElementById('logout');
 	const errors = document.getElementById('errors');
 	const urlParams = new URLSearchParams(window.location.search);
 
@@ -46,30 +45,4 @@
 
 	});
 
-	logoutBtn && logoutBtn.addEventListener('click', event => {
-		auth.logout();
-		event.preventDefault();
-	})
-
-    function validateUser() {
-		if (!firebase.auth().currentUser) {
-			// user is not logged in
-			//window.location = 'index.html?error=accessDenied';
-			return false;
-		}
-
-		return true;
-    }
-    window.onload = function(){
-        if(validateUser()){
-            console.log("OK");
-        }
-        else{
-            console.log("NOT OK");
-        }
-	}
-	
-	
-
 })(this);
-
