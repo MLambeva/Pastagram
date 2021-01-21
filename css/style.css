@@ -295,6 +295,14 @@ body {
 
 /*-----------------------------Upload pasta---------------------*/
 
+#upload-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+}
+
 .upload-input {
 	width: 50%;
 	align-self: center;

@@ -91,7 +91,7 @@
 
 
 
-    const postPasta = (image) => {
+    const postPasta = (imageURL, imageName) => {
         const currentUser = firebase.auth().currentUser;
         const userDisplayName = currentUser ? currentUser.displayName : "";
         const userId = currentUser ? currentUser.uid : "";
@@ -102,7 +102,8 @@
         pastaDbRef.push({
             'username': userDisplayName,
             'userId': userId,
-            'image': image
+            'imageURL': imageURL,
+            'imageName' : imageName
         });
 
         if (userDbRef) {

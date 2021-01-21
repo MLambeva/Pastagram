@@ -69,5 +69,31 @@
             }
         }
     });
+
+    const post = data => {
+        const state = data.val();
+
+        return `<article class="pasta">
+                    <div class="img-container">
+                        <a href="${state.imageURL}"><img src="${state.imageURL}" /></a>
+                    </div>
+                    <label>${state.imageName}</label>
+                </article>`;
+    };
+
+    newPost.addEventListener('submit', event => {
+        const URL = document.getElementById('image-URL');
+        const name = document.getElementById('image-name')
+        const URLValue = URL.value;
+        const nameValue = name.value;
+
+        URL.value = '';
+        name.value = '';
+        if (URLValue && nameValue) {
+            pasta.post(URLValue);
+            pasta.post(nameValue);
+        }
+        event.preventDefault();
+    });
 })(this);
 

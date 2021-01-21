@@ -27,14 +27,16 @@
     <div class="main">
         <section class="canvas">
             <h2 class="page-title">Upload</h2>
+            <form id="upload-form">
+                <input class="upload-input" name="imageURL" id="image-URL" placeholder="Paste image URL!"></input>
 
-            <input class = "upload-input" name="image" id="imageURL" placeholder="Paste image URL!"></input>
-            
-            <!--<div><img id="output" style="max-width: 50%; display: none;" /></div>-->
+                <!--<div><img id="output" style="max-width: 50%; display: none;" /></div>-->
 
-            <input class = "upload-input" id="title-write" placeholder="Name your pasta creation!"></input>
+                <input class="upload-input" name="imageName" id="image-name"
+                    placeholder="Name your pasta creation!"></input>
 
-            <button type="submit" class="auth-button">Submit Pasta!</button>
+                <button type="submit" class="auth-button">Submit Pasta!</button>
+            </form>
         </section>
     </div>
 
@@ -44,7 +46,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
     <script src="js/db.js"></script>
     <script src="js/controller.js"></script>
-    <script src ="js/images.js"></script>
+    <script src="js/images.js"></script>
 </body>
 
 </html>
