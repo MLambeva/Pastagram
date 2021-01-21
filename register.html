@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Pastagram</title>
+	<link rel="stylesheet" href="css/style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+
+<body>
+	<div class="banner">
+		<a class="banner-title" href="index.html">Pastagram</a>
+	</div>
+	<div class="auth">
+		<form class="auth-form" id="register-form">
+			<a class="auth-title" href="index.html">Pastagram</a>
+
+			<h2 class="auth-subtitle">Registration</h2>
+
+			<div class="inputs">
+				<div class="errors" id="errors"></div>
+				<input type="text" name="username" placeholder="Username" class="auth-input" required />
+				<input type="text" name="email" placeholder="Email" class="auth-input" required />
+				<input type="password" name="password" placeholder="Password" class="auth-input" />
+				<button type="submit" class="auth-button">Submit</button>
+			</div>
+
+			<div id="register">
+				<label>Already have an account?</label>
+				<a href="login.html" title="Log in" class="reg-link">Log in</a>
+			</div>
+
+
+		</form>
+	</div>
+	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
+	<script src="js/db.js"></script>
+	<script src ="js/controller.js"></script>
+</body>
+
+</html>

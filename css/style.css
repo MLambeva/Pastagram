@@ -1,0 +1,297 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body, .auth {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	outline: 0;
+	padding: 0;
+	border: 0;
+}
+
+body {
+	/*background: #CBFFB3;*/
+	background: #E6FCE4;
+	font-family: 'Tahoma', sans-serif;
+}
+
+.banner {
+	display: flex;
+	height: 3.6rem;
+	background: #FFD59B;
+}
+
+.footer {
+	display: flex;
+	height: 4rem;
+	background: #FFD59B;
+}
+
+.banner-title {
+	margin: 0;
+	text-decoration: none;
+	font-size: 2.5rem;
+	color: black;
+	font-weight: bold;
+}
+
+.auth {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.auth-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	background: #FCFFEB;
+	width: 90%;
+	height: 80%;
+	max-width: 30rem;
+	max-height: 38rem;
+	border: 4px solid rgb(225, 245, 225);
+	border-right: 0;
+	border-radius: 1rem;
+	padding: 0;
+}
+
+.auth-title {
+	display: none;
+	margin: 0;
+	text-decoration: none;
+	font-size: 2.5rem;
+	color: black;
+	font-weight: bold;
+}
+
+.auth-subtitle {
+	font-size: 34px;
+	margin: 0;
+	margin-top: 1rem;
+}
+
+.inputs {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	align-items: center;
+}
+
+.auth-input {
+	background-color: #f3f7ff;
+	border: none;
+	border-bottom: 3px solid #FFD59B;
+	border-left: 3px solid #FFD59B;
+	border-radius: 15px;
+	font-size: 0.875rem;
+	margin-bottom: 1rem;
+	height: 2.5rem;
+	width: 95%;
+	padding-left: 0.5rem;
+}
+
+.auth-input:focus {
+	border-radius: 15px;
+	border-color: #ffb042;
+	outline: 0;
+}
+
+.auth-button {
+	background-color: #FFD59B;
+	border: none;
+	border-radius: 20px;
+	font-size: 1rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+	height: 2.5rem;
+	width: 40%;
+	max-width: 8rem;
+}
+
+.auth-button:hover {
+	background-color: #ffb042;
+}
+
+.auth-button:focus {
+	outline: 0;
+	background-color: #f9ad3f;
+}
+
+#register {
+	font-size: 20px;
+	margin-bottom: 1rem;
+}
+
+.reg-link {
+	color: #ffb042;
+	font-weight: bold;
+}
+
+@media only screen and (max-width: 890px) {
+	.banner {
+		display: none;
+	}
+	.auth-title {
+		display: block;
+		background-color: #FFD59B;
+		margin: 0;
+		border-top-left-radius: 1rem;
+		border-top-right-radius: 1rem;
+		height: 50px;
+		width: 100%;
+		text-align: center;
+	}
+}
+
+/*------------------------------------Index-------------------------------------*/
+
+.main {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	min-height: 100%;
+}
+
+.canvas {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 80%;
+	min-height: 80%;
+	height: 90%;
+	background-color: #FCFFEB;
+}
+
+.page-title {
+	font-size: 34px;
+}
+
+.menu {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #FFD59B;
+	padding: 0 2rem 0 2rem;
+	height: 40px;
+}
+
+.title {
+	display: none;
+	margin: 0;
+	text-decoration: none;
+	font-size: 2rem;
+	color: black;
+	font-weight: bold;
+}
+
+.menu-items {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.menu-items>li {
+	font-weight: bold;
+	margin-right: 1rem;
+}
+
+.menu-link {
+	color: black;
+	text-decoration: none;
+}
+
+#pastas {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.pasta {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	background-color: #f3f7ff;
+	margin: 1rem;
+	min-width: 10rem;
+	width: 16%;
+}
+
+.img-container {
+	width: 100%;
+	position: relative;
+}
+
+.img-container:after {
+	content: "";
+	display: block;
+	padding-bottom: 100%;
+}
+
+.pasta img {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+.pasta>label {
+	text-align: center;
+	width: 100%;
+	font-size: 140%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@media only screen and (max-width: 890px) {
+	.title {
+		display: block;
+	}
+	.canvas {
+		width: 90%;
+	}
+}
+
+@media only screen and (max-width: 679px) {
+	.title {
+		display: none;
+	}
+	.canvas {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 440px) {
+	.menu {
+		padding: 0;
+		padding-left: 1rem;
+	}
+	.menu-items>li {
+		font-size: 4vw;
+	}
+	#pastas {
+		justify-content: space-evenly;
+	}
+	.pasta {
+		width: 40%;
+	}
+}
+
+/*-----------------------------Upload pasta---------------------*/
+
+#title-write {
+	width: 50%;
+	align-self: center;
+	font-size: 2rem;
+}
+
+#title-write:focus {
+	outline: 0;
+}
