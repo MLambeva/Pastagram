@@ -2,6 +2,7 @@
     const db = firebase.database();
 	const pastasDB = db.ref('/pastas');
     const pastaContainer = document.getElementById('pastas');
+    const myPastaContainer = document.getElementById('my-pastas');
     const newPasta = document.getElementById('upload-form');
     
     var user = firebase.auth().currentUser;
@@ -114,12 +115,31 @@
             if (!validateUser()) {
                 return;
             }
-    
-            //document.getElementById("loader").classList.add("hidden");
+            
+            document.getElementById("loader").classList.add("hidden");
             let article = document.createElement('ARTICLE');
             article.classList.add('pasta');
             article.innerHTML = post(data);
             pastaContainer.prepend(article);
+    
+        });
+    }
+
+    if(myPastaContainer)
+    {
+        pastasDB.on('child_added', data => {
+            if (!validateUser()) {
+                return;
+            }
+    
+            if (data.val().userId == firebase.auth().currentUser.uid)
+            {
+                document.getElementById("loader").classList.add("hidden");
+                let article = document.createElement('ARTICLE');
+                article.classList.add('pasta');
+                article.innerHTML = post(data);
+                myPastaContainer.prepend(article);
+            }
     
         });
     }
