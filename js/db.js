@@ -4,7 +4,7 @@
         const firebaseConfig = {
             apiKey: "AIzaSyAaurpIbwspzgj841bfWhbU0cwCoTKA0JI",
             authDomain: "pastagram-a309c.firebaseapp.com",
-            databaseURL: "https://pastagram-a309c.firebaseapp.com",
+            databaseURL: "https://pastagram-a309c-default-rtdb.firebaseio.com/",
             projectId: "pastagram-a309c",
             storageBucket: "", //"pastagram-a309c.appspot.com",
             messagingSenderId: "544116547888"

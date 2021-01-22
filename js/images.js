@@ -1,5 +1,9 @@
 (() => {
-
+    const db = firebase.database();
+	const pastasDB = db.ref('/pastas');
+    const pastaContainer = document.getElementById('pastas');
+    const newPasta = document.getElementById('upload-form');
+    
     var user = firebase.auth().currentUser;
     firebase.auth().onAuthStateChanged(function (user) {
         let menu = document.getElementById('menu-buttons');
@@ -70,30 +74,56 @@
         }
     });
 
+    function validateUser() {
+		if (!firebase.auth().currentUser) {
+			// user is not logged in
+			window.location = 'login.html?error=accessDenied';
+			return false;
+		}
+		return true;
+	}
+
     const post = data => {
         const state = data.val();
 
-        return `<article class="pasta">
-                    <div class="img-container">
-                        <a href="${state.imageURL}"><img src="${state.imageURL}" /></a>
-                    </div>
-                    <label>${state.imageName}</label>
-                </article>`;
+        return `<div class="img-container">
+                    <a href="${state.imageURL}"><img src="${state.imageURL}" /></a>
+                </div>
+                <label>${state.imageName}</label>`;
     };
+    if(newPasta)
+    {
+        newPasta.addEventListener('submit', event => {
+            const URL = document.getElementById('image-URL');
+            const name = document.getElementById('image-name')
+            const URLValue = URL.value;
+            const nameValue = name.value;
+    
+            URL.value = '';
+            name.value = '';
+            if (URLValue && nameValue) {
+                pasta.post(URLValue, nameValue);
+            }
+            event.preventDefault();
+        });
+    }
+    
+    if(pastaContainer)
+    {
+        pastasDB.on('child_added', data => {
+            if (!validateUser()) {
+                return;
+            }
+    
+            //document.getElementById("loader").classList.add("hidden");
+            let article = document.createElement('ARTICLE');
+            article.classList.add('pasta');
+            article.innerHTML = post(data);
+            pastaContainer.prepend(article);
+    
+        });
+    }
+    
 
-    newPost.addEventListener('submit', event => {
-        const URL = document.getElementById('image-URL');
-        const name = document.getElementById('image-name')
-        const URLValue = URL.value;
-        const nameValue = name.value;
-
-        URL.value = '';
-        name.value = '';
-        if (URLValue && nameValue) {
-            pasta.post(URLValue);
-            pasta.post(nameValue);
-        }
-        event.preventDefault();
-    });
 })(this);
 
