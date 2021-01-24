@@ -6,12 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Pastagram</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Unica One' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <script src="https://kit.fontawesome.com/e8215443cb.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <div class="banner">
+        <img id = "logo" src = "logo.png"></img>
         <a class="banner-title" href="index.html">Pastagram</a>
     </div>
     <div class="menu">
@@ -20,7 +22,7 @@
             <li><a class="menu-link" href="my-uploads.html">My uploads</a></li>
             <li><a class="menu-link" href="upload.html">Upload</a></li>
         </ul>
-        <a class="title" href="index.html">Pastagram</a>
+        <a class="menu-title" href="index.html">Pastagram</a>
         <ul class="menu-items" id="menu-buttons">
         </ul>
     </div>
@@ -28,8 +30,8 @@
     <div class="main">
         <section class="canvas">
             <h2 class="page-title">My uploads</h2>
-            <div class="lds-ripple" id="loader"><div></div><div></div></div>
-            <div id="my-pastas">
+            <div class="lds-ripple" id="loader"><div></div></div>
+            <div class = "image-container" id="my-pastas">
             </div>
         </section>
     </div>

@@ -1,5 +1,6 @@
 * {
 	box-sizing: border-box;
+	color : #48423c;
 }
 
 html, body, .auth {
@@ -12,15 +13,15 @@ html, body, .auth {
 }
 
 body {
-	/*background: #CBFFB3;*/
 	background: #E6FCE4;
-	font-family: 'Tahoma', sans-serif;
+	font-family: 'Unica One';
 }
 
 .banner {
 	display: flex;
 	height: 3.6rem;
 	background: #FFD59B;
+	justify-content: center;
 }
 
 .footer {
@@ -29,13 +30,23 @@ body {
 	background: #FFD59B;
 }
 
+.banner-logo {
+	height: 100%;
+}
+
+#logo {
+	height: 95%;
+	border-radius: 50%;
+}
+
 .banner-title {
 	margin: 0;
 	text-decoration: none;
-	font-size: 2.5rem;
-	color: black;
+	font-size: 3rem;
 	font-weight: bold;
 }
+
+/*--------------------Login & Register--------------------*/
 
 .auth {
 	display: flex;
@@ -64,14 +75,19 @@ body {
 	margin: 0;
 	text-decoration: none;
 	font-size: 2.5rem;
-	color: black;
 	font-weight: bold;
 }
 
 .auth-subtitle {
-	font-size: 34px;
+	font-size: 2.4rem;
 	margin: 0;
 	margin-top: 1rem;
+}
+
+.errors {
+	font-size: 1.1em;
+	font-weight: bold;
+	margin-bottom: 1rem;
 }
 
 .inputs {
@@ -104,12 +120,13 @@ body {
 	background-color: #FFD59B;
 	border: none;
 	border-radius: 20px;
-	font-size: 1rem;
+	font-size: 1.4rem;
 	font-weight: bold;
 	margin-bottom: 1rem;
 	height: 2.5rem;
 	width: 40%;
 	max-width: 8rem;
+	font-family: 'Unica One';
 }
 
 .auth-button:hover {
@@ -122,7 +139,7 @@ body {
 }
 
 #register {
-	font-size: 20px;
+	font-size: 1.5rem;
 	margin-bottom: 1rem;
 }
 
@@ -147,45 +164,7 @@ body {
 	}
 }
 
-/*------------------------------------Index-------------------------------------*/
-.lds-ripple {
-    display: block;
-    position: relative;
-    width: 64px;
-    height: 64px;
-    margin: auto;
-}
-.lds-ripple div {
-    position: absolute;
-    border: 4px solid #333;
-    opacity: 1;
-    border-radius: 50%;
-    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-.lds-ripple div:nth-child(2) {
-    animation-delay: -0.5s;
-}
-@keyframes lds-ripple {
-    0% {
-        top: 28px;
-        left: 28px;
-        width: 0;
-        height: 0;
-        opacity: 1;
-    }
-    100% {
-        top: -1px;
-        left: -1px;
-        width: 58px;
-        height: 58px;
-        opacity: 0;
-    }
-}
-
-.hidden {
-    display: none;
-}
-
+/*------------------------------------Main Pages-------------------------------------*/
 
 .main {
 	display: flex;
@@ -205,24 +184,25 @@ body {
 }
 
 .page-title {
-	font-size: 34px;
+	font-size: 2.5rem;
 }
 
 .menu {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	background-color: #FFD59B;
+	background-color: rgb(255, 205, 134);
 	padding: 0 2rem 0 2rem;
-	height: 40px;
+	height: 2.7rem;
+	border-top: 2px solid #ffc778;
+	
 }
 
-.title {
+.menu-title {
 	display: none;
 	margin: 0;
 	text-decoration: none;
 	font-size: 2rem;
-	color: black;
 	font-weight: bold;
 }
 
@@ -235,24 +215,69 @@ body {
 
 .menu-items * {
 	font-weight: bold;
-	margin-right: 1rem;
+	height: 100%;
+	background: #ffc26d;
 }
 
-.menu-link {
-	color: black;
+.menu-items>li>* {
 	text-decoration: none;
+	font-size: 1.6rem;
+	padding: 0.2em 0.4em 0.2em 0.4em;
+	border: 0;
+	border-right: 1px solid #e98b08;
+	border-left: 1px solid #e98b08;
 }
 
 .menu-button {
-	border : 0;
-	font-family: 'Tahoma', sans-serif;
-	background: #FCFFEB;
-	border-radius: 10px;
-	padding: 0.2em 0.4em 0.2em 0.4em;
-	font-size: 1.1rem;
+	font-family: 'Unica One';
+	background: #ffc26d;
 }
 
-#pastas {
+.menu-button:hover, .menu-link:hover {
+	background: #ffae3c;
+	cursor: pointer;
+}
+
+/*------------------------------------Index and My uploads-------------------------------------*/
+
+.lds-ripple {
+	display: block;
+	position: relative;
+	width: 64px;
+	height: 64px;
+	margin: auto;
+}
+
+.lds-ripple div {
+	position: absolute;
+	border: 4px solid #333;
+	opacity: 1;
+	border-radius: 50%;
+	animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+@keyframes lds-ripple {
+	0% {
+		top: 28px;
+		left: 28px;
+		width: 0;
+		height: 0;
+		opacity: 1;
+	}
+	100% {
+		top: -1px;
+		left: -1px;
+		width: 58px;
+		height: 58px;
+		opacity: 0;
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+.image-container {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -267,7 +292,7 @@ body {
 	background-color: #f3f7ff;
 	margin: 1rem;
 	min-width: 10rem;
-	width: 16%;
+	width: 	13vw;
 }
 
 .img-container {
@@ -291,14 +316,15 @@ body {
 .pasta>label {
 	text-align: center;
 	width: 100%;
-	font-size: 140%;
+	font-size: 180%;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	font-weight: bold;
 }
 
 @media only screen and (max-width: 890px) {
-	.title {
+	.menu-title {
 		display: block;
 	}
 	.canvas {
@@ -306,8 +332,8 @@ body {
 	}
 }
 
-@media only screen and (max-width: 679px) {
-	.title {
+@media only screen and (max-width: 711px) {
+	.menu-title {
 		display: none;
 	}
 	.canvas {
@@ -315,15 +341,20 @@ body {
 	}
 }
 
-@media only screen and (max-width: 440px) {
+@media only screen and (max-width: 565px) {
 	.menu {
 		padding: 0;
-		padding-left: 1rem;
 	}
-	.menu-items>li {
-		font-size: 4vw;
+}
+
+@media only screen and (max-width: 502px) {
+	.menu-items>li * {
+		font-size: 5vw;
 	}
-	#pastas {
+}
+
+@media only screen and (max-width: 440px) {
+	.image-container {
 		justify-content: space-evenly;
 	}
 	.pasta {
@@ -331,7 +362,7 @@ body {
 	}
 }
 
-/*-----------------------------Upload pasta---------------------*/
+/*-----------------------------Upload page---------------------*/
 
 #upload-form {
 	display: flex;
@@ -341,13 +372,23 @@ body {
 	height: 100%;
 }
 
+#upload-form>.auth-button {
+	max-width: 10rem;
+	width: 10rem;
+}
+
 .upload-input {
 	width: 50%;
 	align-self: center;
-	font-size: 2rem;
+	font-size: 2em;
 	margin-bottom: 2rem;
 }
 
 .upload-input:focus {
 	outline: 0;
+}
+
+.login-warning {
+	font-size: 2em;
+	font-weight: bold;
 }

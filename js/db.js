@@ -99,34 +99,38 @@
         const pastaDbRef = db.ref('pastas/');
         const userDbRef = currentUser ? db.ref('users/' + userId) : undefined;
 
-        pastaDbRef.push({
-            'username': userDisplayName,
-            'userId': userId,
-            'imageURL': imageURL,
-            'imageName' : imageName
-        });
-
-        if (userDbRef) {
-
-            userDbRef.once('value').then(snapshot => {
-                if (snapshot.val()) {
-                    let pastas = parseInt(snapshot.val()['pastas']) + 1;
-
-                    // increment count of posts for current user
-                    userDbRef.update({
-                        pastas: pastas
-                    });
-                } else {
-
-                    userDbRef.set({
-                        'pastas': '1'
-                    });
-                }
+        if (currentUser) {
+            pastaDbRef.push({
+                'username': userDisplayName,
+                'userId': userId,
+                'imageURL': imageURL,
+                'imageName': imageName
             });
+
+            if (userDbRef) {
+
+                userDbRef.once('value').then(snapshot => {
+                    if (snapshot.val()) {
+                        let pastas = parseInt(snapshot.val()['pastas']) + 1;
+
+                        // increment count of posts for current user
+                        userDbRef.update({
+                            pastas: pastas
+                        });
+                    } else {
+                        userDbRef.set({
+                            'pastas': '1'
+                        });
+                    }
+                });
+            }
+        }
+        else {
+            window.location = 'login.html?error=accessDenied';
         }
     };
 
-    const deletePastas = id => {
+    const deletePasta = id => {
         const db = firebase.database();
         const dbRef = db.ref('pastas/' + id);
 
@@ -134,19 +138,19 @@
     };
 
     const getUserStats = id => {
-		const db = firebase.database();
-		return db.ref('pastas/' + id);
+        const db = firebase.database();
+        return db.ref('pastas/' + id);
     };
-    
-    this.auth = {
-		login: login,
-		logout: logout,
-		register: register,
-		getUserStats: getUserStats
-	};
 
-	this.pasta = {
-		post: postPasta,
-		delete: deletePastas
-	};
+    this.auth = {
+        login: login,
+        logout: logout,
+        register: register,
+        getUserStats: getUserStats
+    };
+
+    this.pasta = {
+        post: postPasta,
+        delete: deletePasta
+    };
 })(this); 
