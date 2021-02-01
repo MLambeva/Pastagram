@@ -13,14 +13,14 @@
 
 <body>
     <div class="banner">
-        <a class = "banner-logo" href="index.html"><img id = "logo" src = "images/logo.png"></img></a>
+        <a class="banner-logo" href="index.html"><img id="logo" src="images/logo.png"></img></a>
         <a class="banner-title" href="index.html">Pastagram</a>
     </div>
     <div class="menu">
         <ul class="menu-items">
             <li><a class="menu-link" href="index.html">Pics</a></li>
             <li><a class="menu-link" href="my-uploads.html">My uploads</a></li>
-            <!--<li><a class="menu-link" href="my-favourites.html">Favourites</a></li> -->
+            <li><a class="menu-link" href="my-favourites.html">Favourites</a></li>
             <li><a class="menu-link" href="upload.html">Upload</a></li>
         </ul>
         <a class="menu-title" href="index.html">Pastagram</a>
@@ -31,8 +31,10 @@
     <div class="main">
         <section class="canvas">
             <h2 class="page-title">My uploads</h2>
-            <div class="lds-ripple" id="loader"><div></div></div>
-            <div class = "image-container" id="my-pastas">
+            <div class="lds-ripple" id="loader">
+                <div></div>
+            </div>
+            <div class="image-container" id="my-pastas">
             </div>
         </section>
     </div>
@@ -40,11 +42,11 @@
     <div class="footer">
 
     </div>
-    
+
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
     <script src="js/db.js"></script>
-    <script src ="js/controller.js"></script>
-    <script src ="js/images.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/images.js"></script>
 </body>
 
 </html>

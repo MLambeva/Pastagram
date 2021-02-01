@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Unica One' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="https://kit.fontawesome.com/e8215443cb.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -29,20 +30,19 @@
 
     <div class="main">
         <section class="canvas">
-            <h2 class="page-title">Upload</h2>
-            <form id="upload-form">
-                <input class="upload-input" name="imageURL" id="image-URL" placeholder="Paste image URL!"></input>
-                <input class="upload-input" name="imageName" id="image-name"
-                    placeholder="Name your pasta creation!"></input>
-
-                <button type="submit" class="auth-button upload-button">Submit Pasta!</button>
-            </form>
+            <h2 class="page-title">My favourites</h2>
+            <div class="lds-ripple" id="loader">
+                <div></div>
+            </div>
+            <div class="image-container" id="fav-pastas">
+            </div>
         </section>
     </div>
 
     <div class="footer">
 
     </div>
+
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
     <script src="js/db.js"></script>
     <script src="js/controller.js"></script>

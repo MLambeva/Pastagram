@@ -133,6 +133,42 @@
     const deletePasta = id => {
         const db = firebase.database();
         const dbRef = db.ref('pastas/' + id);
+        const currentUser = firebase.auth().currentUser;
+        const userId = currentUser.uid;
+        const userDbRef = db.ref('users/' + userId);
+
+        if (userDbRef) {
+            userDbRef.once('value').then(snapshot => {
+                if (snapshot.val()) {
+                    let pastas = parseInt(snapshot.val()['pastas']) - 1;
+
+                    // decrement count of posts for current user
+                    userDbRef.update({
+                        pastas: pastas
+                    });
+                }
+            });
+        }
+
+        dbRef.remove();
+    };
+
+    const favouritePasta = id => {
+        const db = firebase.database();
+        const currentUser = firebase.auth().currentUser;
+        const userId = currentUser.uid;
+
+        const dbRef = db.ref('users/' + userId + '/favourites/' + id);
+
+        dbRef.push({ '1': "1" });
+    };
+
+    const unfavouritePasta = id => {
+        const db = firebase.database();
+        const currentUser = firebase.auth().currentUser;
+        const userId = currentUser.uid;
+
+        const dbRef = db.ref('users/' + userId + '/favourites/' + id);
 
         dbRef.remove();
     };
@@ -151,6 +187,8 @@
 
     this.pasta = {
         post: postPasta,
-        delete: deletePasta
+        delete: deletePasta,
+        favourite: favouritePasta,
+        unfavourite: unfavouritePasta
     };
 })(this); 

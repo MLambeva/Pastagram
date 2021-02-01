@@ -3,11 +3,11 @@
     const pastasDB = db.ref('/pastas');
     const pastaContainer = document.getElementById('pastas');
     const myPastaContainer = document.getElementById('my-pastas');
+    const favPastaContainer = document.getElementById('fav-pastas');
     const newPasta = document.getElementById('upload-form');
 
-    var user = firebase.auth().currentUser;
     firebase.auth().onAuthStateChanged(function (user) {
-        let menu = document.getElementById('menu-buttons');
+        const menu = document.getElementById('menu-buttons');
 
         if (menu) {
             if (user) {
@@ -29,8 +29,8 @@
                 let item2 = document.createElement('li');
                 menu.appendChild(item1);
                 menu.appendChild(item2);
-                item1.classList.add('button-li');
-                item2.classList.add('button-li');
+                item1.classList.add('menu-item');
+                item2.classList.add('menu-item');
 
                 item1.innerHTML = `<button class="menu-button" id="login">Log in</button>`;
                 item2.innerHTML = `<button class="menu-button" id="reg">Register</button>`;
@@ -65,6 +65,18 @@
                     myPastaContainer.prepend(label);
                 }
             }
+            else if (favPastaContainer) {
+                if (user) {
+                    populateFavourites();
+                }
+                else {
+                    document.getElementById("loader").classList.add("hidden");
+                    let label = document.createElement('label');
+                    label.classList.add('login-warning');
+                    label.innerHTML = `Please log in to see your favourites!`;
+                    favPastaContainer.prepend(label);
+                }
+            }
 
         }
     });
@@ -84,8 +96,10 @@
         else {
             return `<div class="img-container">
                         <a href="${state.imageURL}"><img src="${state.imageURL}" /></a>
-                    </div>
-                    <label>${state.imageName}</label>`;
+                    </div>                    
+                    <div class="fav-pasta">
+                        <label class="image-name">${state.imageName}</label>
+                    </div>`;
         }
     };
 
@@ -105,16 +119,54 @@
         });
     }
 
-    
-
     const populateUploads = () => pastasDB.on('child_added', data => {
 
         document.getElementById("loader").classList.add("hidden");
         let article = document.createElement('article');
         article.classList.add('pasta');
         article.innerHTML = post(data);
-        pastaContainer.prepend(article);
 
+        if (firebase.auth().currentUser) {
+
+            let btn = document.createElement('button');
+            btn.classList.add("fa-heart");
+            btn.setAttribute('id', 'fav-button');
+            btn.setAttribute('data-id', data.key);
+
+            const db = firebase.database();
+            const currentUser = firebase.auth().currentUser;
+            const userId = currentUser.uid;
+            const dbRef = db.ref('users/' + userId + '/favourites/');
+
+            if (dbRef) {
+                dbRef.once('value').then(snapshot => {
+                    if (snapshot.hasChild(data.key)) {
+                        btn.classList.add('fas');
+                    }
+                    else {
+                        btn.classList.add('far');
+                    }
+                });
+            }
+
+            btn.addEventListener('click', event => {
+
+                if (btn.classList.contains('far')) {
+                    pasta.favourite(data.key);
+                    btn.classList.remove('far');
+                    btn.classList.add('fas');
+                }
+                else {
+                    pasta.unfavourite(data.key);
+                    btn.classList.remove('fas');
+                    btn.classList.add('far');
+                }
+                event.preventDefault();
+            });
+
+            article.querySelector('.fav-pasta').append(btn);
+        }
+        pastaContainer.prepend(article);
     });
 
     const populateMyUploads = () => pastasDB.on('child_added', data => {
@@ -134,6 +186,51 @@
         }
     });
 
+    const populateFavourites = () => pastasDB.on('child_added', data => {
+
+        document.getElementById("loader").classList.add("hidden");
+        let article = document.createElement('article');
+        article.classList.add('pasta');
+        article.innerHTML = post(data);
+
+
+        let btn = document.createElement('button');
+        btn.classList.add("fa-heart");
+        btn.setAttribute('id', 'fav-button');
+        btn.setAttribute('data-id', data.key);
+
+        const db = firebase.database();
+        const currentUser = firebase.auth().currentUser;
+        const userId = currentUser.uid;
+        const dbRef = db.ref('users/' + userId + '/favourites/');
+
+        btn.addEventListener('click', event => {
+
+            if (btn.classList.contains('far')) {
+                pasta.favourite(data.key);
+                btn.classList.remove('far');
+                btn.classList.add('fas');
+            }
+            else {
+                pasta.unfavourite(data.key);
+                btn.classList.remove('fas');
+                btn.classList.add('far');
+            }
+            event.preventDefault();
+        });
+
+        article.querySelector('.fav-pasta').append(btn);
+
+        if (dbRef) {
+            dbRef.once('value').then(snapshot => {
+                if (snapshot.hasChild(data.key)) {
+                    btn.classList.add('fas');
+                    favPastaContainer.prepend(article);
+                }
+            });
+        }
+
+    });
 
 })(this);
 
