@@ -88,7 +88,7 @@
 
         if (myPastaContainer) {
             return `<div class="img-container">
-                        <a href="${state.imageURL}"><img src="${state.imageURL}" /></a>
+                        <a href="${state.imageURL}"><img src="${state.imageURL}" class="pasta-image" /></a>
                     </div>
                     <label>${state.imageName}</label>
                     <div class="delete-pasta">
@@ -97,7 +97,7 @@
         }
         else {
             return `<div class="img-container">
-                        <a href="${state.imageURL}"><img src="${state.imageURL}" /></a>
+                        <a href="${state.imageURL}"><img src="${state.imageURL}" class="pasta-image" /></a>
                     </div>                    
                     <div class="fav-pasta">
                         <label class="image-name">${state.imageName}</label>

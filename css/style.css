@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    color: #48423c;
+    color: #48423C;
 }
 
 html, body, .auth {
@@ -64,7 +64,7 @@ body {
     height: 80%;
     max-width: 30rem;
     max-height: 38rem;
-    border: 4px solid rgb(225, 245, 225);
+    border: 4px solid #E1F5E1;
     border-right: 0;
     border-radius: 1rem;
     padding: 0;
@@ -98,7 +98,7 @@ body {
 }
 
 .auth-input {
-    background-color: #f3f7ff;
+    background-color: #F3F7FF;
     border: none;
     border-bottom: 3px solid #FFD59B;
     border-left: 3px solid #FFD59B;
@@ -112,7 +112,7 @@ body {
 
 .auth-input:focus {
     border-radius: 15px;
-    border-color: #ffb042;
+    border-color: #FFB042;
     outline: 0;
 }
 
@@ -130,12 +130,12 @@ body {
 }
 
 .auth-button:hover {
-    background-color: #ffb042;
+    background-color: #FFB042;
 }
 
 .auth-button:focus {
     outline: 0;
-    background-color: #f9ad3f;
+    background-color: #F9AD3F;
 }
 
 #register {
@@ -144,7 +144,7 @@ body {
 }
 
 .reg-link {
-    color: #ffb042;
+    color: #FFB042;;
     font-weight: bold;
 }
 
@@ -191,10 +191,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(255, 205, 134);
+    background-color: #FFCD86;
     padding: 0 2rem 0 2rem;
     height: 2.7rem;
-    border-top: 2px solid #ffc778;
+    border-top: 2px solid #FFC778;
 }
 
 .menu-title {
@@ -215,7 +215,7 @@ body {
 .menu-item, .menu-link, .menu-button {
     font-weight: bold;
     height: 100%;
-    background: #ffc26d;
+    background: #FFC26D;
 }
 
 .menu-link, .menu-button {
@@ -223,21 +223,21 @@ body {
     font-size: 1.6rem;
     padding: 0.2em 0.4em 0.2em 0.4em;
     border: 0;
-    border-right: 1px solid #e98b08;
-    border-left: 1px solid #e98b08;
+    border-right: 1px solid #E98B08;
+    border-left: 1px solid #E98B08;
 }
 
 .menu-button {
     font-family: 'Unica One';
-    background: #ffc26d;
+    background: #FFC26D;
 }
 
 .menu-button:hover, .menu-link:hover {
-    background: #ffae3c;
+    background: #FFAE3C;
     cursor: pointer;
 }
 
-/*------------------------------------Index and My uploads-------------------------------------*/
+/*------------------------------------Image Pages-------------------------------------*/
 
 .lds-ripple {
     display: block;
@@ -249,7 +249,7 @@ body {
 
 .lds-ripple div {
     position: absolute;
-    border: 4px solid #333;
+    border: 4px solid #48423C;
     opacity: 1;
     border-radius: 50%;
     animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
@@ -288,7 +288,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-color: #f3f7ff;
+    background-color: #F3F7FF;
     margin: 1rem;
     min-width: 10rem;
     width: 13vw;
@@ -305,7 +305,7 @@ body {
     padding-bottom: 100%;
 }
 
-.pasta img {
+.pasta-image {
     position: absolute;
     height: 100%;
     width: 100%;
