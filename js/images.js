@@ -1,3 +1,5 @@
+"use strict";
+
 (() => {
     const db = firebase.database();
     const pastasDB = db.ref('/pastas');
