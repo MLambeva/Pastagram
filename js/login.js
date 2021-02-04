@@ -4,11 +4,14 @@
 	const registerForm = document.getElementById('register-form');
 	const loginForm = document.getElementById('login-form');
 	const errors = document.getElementById('errors');
-	const urlParams = new URLSearchParams(window.location.search);
 
-	if (urlParams.get("error") === "accessDenied") {
-		errors.classList.add('errors-visible');
-		errors.innerText = "Access denied. Please login.";
+	const callback = (success, errorCode, errorMessage) => {
+		if (success) {
+			window.location = 'index.html';
+		} else {
+			errors.classList.add('errors-visible');
+			errors.innerText = errorMessage;
+		}
 	}
 
 	registerForm && registerForm.addEventListener('submit', event => {
@@ -19,14 +22,7 @@
 
 		event.preventDefault();
 
-		auth.register(username, email, password, (success, errorCode, errorMessage) => {
-			if (success) {
-				window.location = 'index.html';
-			} else {
-				errors.classList.add('errors-visible');
-				errors.innerText = errorMessage;
-			}
-		});
+		auth.register(username, email, password, callback);
 	});
 
 	loginForm && loginForm.addEventListener('submit', event => {
@@ -36,15 +32,7 @@
 
 		event.preventDefault();
 
-		auth.login(email, password, (success, errorCode, errorMessage) => {
-			if (success) {
-				window.location = 'index.html';
-			} else {
-				errors.classList.add('errors-visible');
-				errors.innerText = errorMessage;
-			}
-		});
-
+		auth.login(email, password, callback);
 	});
 
 })(this);

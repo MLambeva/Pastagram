@@ -16,18 +16,15 @@
     };
     initDatabase();
 
-
-
     const login = (email, password, callback) => {
         return firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
             // Success - redirect
             callback(true);
         }, (error) => {
             const errorCode = error.code;
-            //Here we use the error message like it is returned by the firebase (the message is in english)
             const errorMessage = error.message;
 
-            // handle error with login
+            // Handle login error
             callback(false, errorCode, errorMessage);
         });
     };
@@ -38,9 +35,9 @@
 
     /**
      * @callback registerCallback
-     * @param {boolean} successful if log-in is successful, false otherwise
-     * @param {number} errorCode the error code in case successful = false
-     * @param {string} errorMessage the error message in case successful = false
+     * @param {boolean} successful - Wether login is successful
+     * @param {number} errorCode - The error code in case successful = false
+     * @param {string} errorMessage - The error message in case successful = false
      */
 
     /**
@@ -49,9 +46,14 @@
      * @param {string} username
      * @param {string} email
      * @param {string} password
-     * @param {registerCallback} callback function to call once the register operation is completed
+     * @param {registerCallback} callback - Function to call once the register operation is completed
      *
      **/
+
+    /**
+     * @param {string} id - Post ID
+     **/
+
     const register = (username, email, password, callback) => {
         firebase.auth().createUserWithEmailAndPassword(email, password).then((data) => {
             data.user.updateProfile({
@@ -91,14 +93,12 @@
         });
     };
 
-
-
     const postPasta = (imageURL, imageName) => {
+        const db = firebase.database();
+        const pastaDbRef = db.ref('pastas/');
         const currentUser = firebase.auth().currentUser;
         const userDisplayName = currentUser ? currentUser.displayName : "";
         const userId = currentUser ? currentUser.uid : "";
-        const db = firebase.database();
-        const pastaDbRef = db.ref('pastas/');
         const userDbRef = currentUser ? db.ref('users/' + userId) : undefined;
 
         if (currentUser) {
@@ -110,10 +110,9 @@
             });
 
             if (userDbRef) {
-
                 userDbRef.once('value').then(snapshot => {
                     if (snapshot.val()) {
-                        let pastas = parseInt(snapshot.val()['pastas']) + 1;
+                        const pastas = parseInt(snapshot.val()['pastas']) + 1;
 
                         // increment count of posts for current user
                         userDbRef.update({
@@ -137,12 +136,12 @@
         const dbRef = db.ref('pastas/' + id);
         const currentUser = firebase.auth().currentUser;
         const userId = currentUser.uid;
-        const userDbRef = db.ref('users/' + userId);
+        const userDbRef = currentUser ? db.ref('users/' + userId) : undefined;
 
         if (userDbRef) {
             userDbRef.once('value').then(snapshot => {
                 if (snapshot.val()) {
-                    let pastas = parseInt(snapshot.val()['pastas']) - 1;
+                    const pastas = parseInt(snapshot.val()['pastas']) - 1;
 
                     // decrement count of posts for current user
                     userDbRef.update({
@@ -162,7 +161,7 @@
 
         const dbRef = db.ref('users/' + userId + '/favourites/' + id);
 
-        dbRef.push({ '1': "1" });
+        dbRef.push("1");
     };
 
     const unfavouritePasta = id => {

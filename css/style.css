@@ -24,12 +24,6 @@ body {
     justify-content: center;
 }
 
-.footer {
-    display: flex;
-    height: 4rem;
-    background: #FFD59B;
-}
-
 .banner-logo {
     height: 100%;
 }
@@ -44,6 +38,12 @@ body {
     text-decoration: none;
     font-size: 3rem;
     font-weight: bold;
+}
+
+footer {
+    display: flex;
+    height: 4rem;
+    background: #FFD59B;
 }
 
 /*--------------------Login & Register--------------------*/
@@ -144,7 +144,8 @@ body {
 }
 
 .reg-link {
-    color: #FFB042;;
+    color: #FFB042;
+    ;
     font-weight: bold;
 }
 
