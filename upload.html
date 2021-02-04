@@ -31,6 +31,7 @@
         <section class="canvas">
             <h2 class="page-title">Upload</h2>
             <form id="upload-form">
+                <div class="errors" id="errors"></div>
                 <input class="upload-input" name="imageURL" id="image-URL" placeholder="Paste image URL!"></input>
                 <input class="upload-input" name="imageName" id="image-name" placeholder="Name your pasta creation!"></input>
                 <button type="submit" class="auth-button upload-button">Submit Pasta!</button>
@@ -39,7 +40,7 @@
     </div>
 
     <footer>
-
+        <p> &copy; Pavel Grigorov <span>&</span> Monika Lambeva</p>
     </footer>
     
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>

@@ -44,6 +44,11 @@ footer {
     display: flex;
     height: 4rem;
     background: #FFD59B;
+    font-size: 1.5rem;
+}
+
+span{
+    font-family: sans-serif;
 }
 
 /*--------------------Login & Register--------------------*/
@@ -335,6 +340,21 @@ footer {
     padding: 0;
     cursor: pointer;
     font-size: 1.4rem;
+}
+
+.delete-button{
+    border-radius: 1rem;
+    background-color: #FCFFEB;
+    border: none;
+    border-style: outset;
+    border-width: 1px;
+    font-family: 'Unica One';
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+}
+
+.delete-button:hover{
+    background-color: #E6FCE4;
 }
 
 @media only screen and (max-width: 890px) {

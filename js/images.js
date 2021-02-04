@@ -41,14 +41,13 @@
 
     const post = data => {
         const post = data.val();
-
         if (myPastaContainer) {
             return `<div class="img-container">
                         <a href="${post.imageURL}"><img src="${post.imageURL}" class="pasta-image" /></a>
                     </div>
-                    <label>${post.imageName}</label>
+                    <label class="image-name">${post.imageName}</label>
                     <div class="delete-pasta">
-                        <button class="delete-pasta" data-id="${data.key}">Del-Eat Pasta</button>
+                        <button class="delete-button" data-id="${data.key}">Del-Eat Pasta</button>
                     </div>`;
         }
         else {
@@ -59,7 +58,7 @@
                         <label class="image-name">${post.imageName}</label>
                     </div>`;
         }
-    };
+    }
 
     const createButton = (menu, id, text, page) => {
         let item = document.createElement('li');
@@ -161,7 +160,7 @@
         else {
             const userId = currentUser.uid;
             const dbRef = db.ref('users/' + userId + '/favourites/');
-            
+
             dbRef && dbRef.once('value').then(snapshot => {
                 if (snapshot.hasChild(data.key)) {
                     favPastaContainer.prepend(article);

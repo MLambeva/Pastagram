@@ -4,6 +4,11 @@
 	const registerForm = document.getElementById('register-form');
 	const loginForm = document.getElementById('login-form');
 	const errors = document.getElementById('errors');
+	const urlParams = new URLSearchParams(window.location.search);
+	if (urlParams.get("error") === "accessDenied") {
+		errors.classList.add('errors-visible');
+		errors.innerText = "Access denied. Please login.";
+	}
 
 	const callback = (success, errorCode, errorMessage) => {
 		if (success) {

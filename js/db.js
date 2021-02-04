@@ -93,6 +93,20 @@
         });
     };
 
+    const validateURL = imageURL => {
+        let extensions = /(\.jpg|\.jpeg|\.bmp|\.png)$/i;
+
+        if (extensions.exec(imageURL)) {
+            return true;
+        }
+        else {
+            const errors = document.getElementById('errors');
+            errors.classList.add('errors-visible');
+            errors.innerText = "URL is not an accepted image!";
+            return false;
+        }
+    }
+
     const postPasta = (imageURL, imageName) => {
         const db = firebase.database();
         const pastaDbRef = db.ref('pastas/');
@@ -102,12 +116,14 @@
         const userDbRef = currentUser ? db.ref('users/' + userId) : undefined;
 
         if (currentUser) {
-            pastaDbRef.push({
-                'username': userDisplayName,
-                'userId': userId,
-                'imageURL': imageURL,
-                'imageName': imageName
-            });
+            if (validateURL(imageURL)) {
+                pastaDbRef.push({
+                    'username': userDisplayName,
+                    'userId': userId,
+                    'imageURL': imageURL,
+                    'imageName': imageName
+                });
+            }
 
             if (userDbRef) {
                 userDbRef.once('value').then(snapshot => {
