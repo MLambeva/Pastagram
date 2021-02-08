@@ -8,7 +8,7 @@
     const favPastaContainer = document.getElementById('fav-pastas');
     const uploadPasta = document.getElementById('upload-form');
 
-    firebase.auth().onAuthStateChanged(function (user) {
+    firebase.auth().onAuthStateChanged(user => {
         const menu = document.getElementById('menu-buttons');
 
         if (menu) {
@@ -134,8 +134,25 @@
         if (currentUser) {
             const userId = currentUser.uid;
             const dbRef = db.ref('users/' + userId + '/favourites/');
+            createFavButton(article, dbRef, data);
+        }
 
-            let btn = document.createElement('button');
+        if (pastaContainer) {
+            pastaContainer.prepend(article)
+        }
+        else {
+            const userId = currentUser.uid;
+            const dbRef = db.ref('users/' + userId + '/favourites/');
+            dbRef && dbRef.once('value').then(snapshot => {
+                if (snapshot.hasChild(data.key)) {
+                    favPastaContainer.prepend(article);
+                }
+            });
+        }
+    }
+
+    const createFavButton = (article, dbRef, data) => {
+        let btn = document.createElement('button');
             btn.classList.add("fa-heart");
             btn.setAttribute('id', 'fav-button');
             btn.setAttribute('data-id', data.key);
@@ -152,21 +169,6 @@
                     btn.classList.add('far');
                 }
             });
-        }
-
-        if (pastaContainer) {
-            pastaContainer.prepend(article)
-        }
-        else {
-            const userId = currentUser.uid;
-            const dbRef = db.ref('users/' + userId + '/favourites/');
-
-            dbRef && dbRef.once('value').then(snapshot => {
-                if (snapshot.hasChild(data.key)) {
-                    favPastaContainer.prepend(article);
-                }
-            });
-        }
     }
 
     const favButtonFunctionality = (data, btn) => {

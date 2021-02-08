@@ -130,7 +130,6 @@
                     if (snapshot.val()) {
                         const pastas = parseInt(snapshot.val()['pastas']) + 1;
 
-                        // increment count of posts for current user
                         userDbRef.update({
                             pastas: pastas
                         });
@@ -159,7 +158,6 @@
                 if (snapshot.val()) {
                     const pastas = parseInt(snapshot.val()['pastas']) - 1;
 
-                    // decrement count of posts for current user
                     userDbRef.update({
                         pastas: pastas
                     });
@@ -190,16 +188,10 @@
         dbRef.remove();
     };
 
-    const getUserStats = id => {
-        const db = firebase.database();
-        return db.ref('pastas/' + id);
-    };
-
     this.auth = {
         login: login,
         logout: logout,
-        register: register,
-        getUserStats: getUserStats
+        register: register
     };
 
     this.pasta = {
