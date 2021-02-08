@@ -75,12 +75,17 @@ span{
     padding: 0;
 }
 
-.auth-title {
+.form-title {
     display: none;
     margin: 0;
     text-decoration: none;
     font-size: 2.5rem;
     font-weight: bold;
+}
+
+.form-logo {
+    display: none;
+    margin: 0;
 }
 
 .auth-subtitle {
@@ -150,23 +155,33 @@ span{
 
 .reg-link {
     color: #FFB042;
-    ;
     font-weight: bold;
 }
 
 @media only screen and (max-width: 890px) {
-    .banner {
+    #auth-banner {
         display: none;
     }
-    .auth-title {
-        display: block;
+    .form-banner {
+        display: flex;
         background-color: #FFD59B;
+        width: 100%;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        height: 50px;
+        justify-content: center;
+    }
+    .form-title {
+        display: inline-block;
+        margin: 0;
+        text-align: center;
+    }
+    .form-logo {
+        display: inline-block;
         margin: 0;
         border-top-left-radius: 1rem;
         border-top-right-radius: 1rem;
         height: 50px;
-        width: 100%;
-        text-align: center;
     }
 }
 
@@ -241,6 +256,51 @@ span{
 .menu-button:hover, .menu-link:hover {
     background: #FFAE3C;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 890px) {
+    .canvas {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 703px) {
+    .canvas {
+        width: 100%;
+    }
+    .menu {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 639px) {
+    .menu-link, .menu-button {
+        font-size: 4vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .menu {
+        height: 6vw;
+    }
+    .menu-link, .menu-button {
+        font-size: 3.8vw;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .menu {
+        height: 2rem;
+    }
+    .menu-link, .menu-button {
+        font-size: 1rem;
+    }
+    .image-container {
+        justify-content: space-evenly;
+    }
+    .pasta {
+        width: 40%;
+    }
 }
 
 /*------------------------------------Image Pages-------------------------------------*/
@@ -355,45 +415,6 @@ span{
 
 .delete-button:hover{
     background-color: #E6FCE4;
-}
-
-@media only screen and (max-width: 890px) {
-    .menu-title {
-        display: block;
-    }
-    .canvas {
-        width: 90%;
-    }
-}
-
-@media only screen and (max-width: 711px) {
-    .menu-title {
-        display: none;
-    }
-    .canvas {
-        width: 100%;
-    }
-}
-
-@media only screen and (max-width: 565px) {
-    .menu {
-        padding: 0;
-    }
-}
-
-@media only screen and (max-width: 502px) {
-    .menu-link, .menu-button {
-        font-size: 5vw;
-    }
-}
-
-@media only screen and (max-width: 440px) {
-    .image-container {
-        justify-content: space-evenly;
-    }
-    .pasta {
-        width: 40%;
-    }
 }
 
 /*-----------------------------Upload page---------------------*/

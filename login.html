@@ -11,13 +11,16 @@
 </head>
 
 <body>
-	<header class="banner">
+	<header class="banner" id="auth-banner">
 		<a class="banner-logo" href="index.html"><img id="logo" src="images/logo.png"></img></a>
 		<a class="banner-title" href="index.html">Pastagram</a>
 	</header>
 	<div class="auth">
 		<form class="auth-form" id="login-form">
-			<a class="auth-title" href="index.html">Pastagram</a>
+			<div class="form-banner">
+				<a class="form-logo" href="index.html"><img id="logo" src="images/logo.png"></img></a>
+				<a class="form-title" href="index.html">Pastagram</a>
+			</div>
 
 			<h2 class="auth-subtitle">Login</h2>
 
@@ -37,8 +40,8 @@
 	</div>
 
 	<footer>
-        <p> &copy; Pavel Grigorov <span>&</span> Monika Lambeva</p>
-    </footer>
+		<p> &copy; Pavel Grigorov <span>&</span> Monika Lambeva</p>
+	</footer>
 
 	<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase.js"></script>
 	<script src="js/db.js"></script>
