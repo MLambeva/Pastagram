@@ -47,7 +47,7 @@ footer {
     font-size: 1.5rem;
 }
 
-span{
+span {
     font-family: sans-serif;
 }
 
@@ -306,9 +306,9 @@ span{
 /*------------------------------------Image Pages-------------------------------------*/
 
 #loader {
-    border: 0.6rem solid #F3F7FF;
+    border: 0.6rem solid #48423C;
     border-radius: 50%;
-    border-top: 0.6rem solid #48423C;
+    border-top: 0.6rem solid #FFAE3C;
     margin-bottom: 1rem;
     width: 4.2rem;
     height: 4.2rem;
@@ -316,12 +316,16 @@ span{
     animation-duration: 2s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-  }
+}
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 .hidden {
     display: none;
@@ -387,7 +391,7 @@ span{
     font-size: 1.4rem;
 }
 
-.delete-button{
+.delete-button {
     border-radius: 1rem;
     background-color: #FCFFEB;
     border: none;
@@ -398,7 +402,7 @@ span{
     font-size: 1.3rem;
 }
 
-.delete-button:hover{
+.delete-button:hover {
     background-color: #E6FCE4;
 }
 
