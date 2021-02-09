@@ -123,8 +123,7 @@
 
             if (!Object.prototype.hasOwnProperty.call(db.users, userId)) {
                 db.users[userId] = {
-                    "favourites": {},
-                    "pastas": 1
+                    "favourites": {}
                 };
             }
 
@@ -139,8 +138,6 @@
                     db.count = parseInt(db.count) + 1;
                 }
 
-                parseInt(db.users[userId].pastas) + 1;
-
                 updateDB(db);
             }
             else {
@@ -153,13 +150,6 @@
 
     const deletePasta = id => {
         fetch("https://api.npoint.io/636409df8ded0c89c938").then(response => response.json()).then(db => {
-            const currentUser = firebase.auth().currentUser;
-            const userId = currentUser.uid;
-            const userDbRef = db.users[userId];
-
-            if (userDbRef && parseInt(userDbRef.pastas) > 0) {
-                userDbRef.pastas = userDbRef.pastas - 1;
-            }
 
             delete db.pastas[id];
 

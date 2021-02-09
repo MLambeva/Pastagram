@@ -44,6 +44,14 @@
 
             if (URL.value && name.value) {
                 pasta.post(URL.value, name.value);
+                const errors = document.getElementById('errors');
+                errors.classList.add('errors-visible');
+                errors.innerText = "Uploaded pasta!";
+            }
+            else {
+                const errors = document.getElementById('errors');
+                errors.classList.add('errors-visible');
+                errors.innerText = "Please fill in both fields!";
             }
             URL.value = '';
             name.value = '';
@@ -58,7 +66,9 @@
             return `<div class="img-container">
                         <a href="${data.imageURL}"><img src="${data.imageURL}" class="pasta-image" /></a>
                     </div>
-                    <label class="image-name"><span>${data.imageName}</span></label>
+                    <div class="fav-pasta">
+                        <label class="image-name"><span>${data.imageName}</span></label>
+                    </div>
                     <div class="delete-pasta">
                         <button class="delete-button" data-id="${key}">Del-Eat Pasta</button>
                     </div>`;
@@ -103,40 +113,35 @@
             hideLoader();
             let emptyFlag = true;
             for (var key in pastasDB) {
-                if (Object.prototype.hasOwnProperty.call(pastasDB, key)) {
-                    let article = document.createElement('article');
-                    article.classList.add('pasta');
-                    article.innerHTML = post(pastasDB, key);
+                let article = document.createElement('article');
+                article.classList.add('pasta');
+                article.innerHTML = post(pastasDB, key);
 
-                    if (currentUser) {
-                        const userId = currentUser.uid;
+                if (currentUser) {
+                    const userId = currentUser.uid;
 
-                        if (!Object.prototype.hasOwnProperty.call(db.users, userId)) {
-                            db.users[userId] = {
-                                "favourites": {},
-                                "pastas": 1
-                            };
-                            database.update(db);
-                        }
-
-                        const dbRef = db.users[userId].favourites;
-                        createFavButton(article, dbRef, key);
+                    if (!Object.prototype.hasOwnProperty.call(db.users, userId)) {
+                        db.users[userId] = {
+                            "favourites": {}
+                        };
+                        database.update(db);
                     }
 
-                    if (pastaContainer) {
-                        pastaContainer.prepend(article);
+                    const dbRef = db.users[userId].favourites;
+                    createFavButton(article, dbRef, key);
+                }
+
+                if (pastaContainer) {
+                    pastaContainer.prepend(article);
+                    emptyFlag = false;
+                }
+                else {
+                    const userId = currentUser.uid;
+                    const dbRef = db.users[userId].favourites;
+
+                    if (Object.prototype.hasOwnProperty.call(dbRef, key)) {
+                        favPastaContainer.prepend(article);
                         emptyFlag = false;
-                    }
-                    else {
-                        const userId = currentUser.uid;
-                        const dbRef = db.users[userId].favourites;
-
-                        if (dbRef) {
-                            if (Object.prototype.hasOwnProperty.call(dbRef, key)) {
-                                favPastaContainer.prepend(article);
-                                emptyFlag = false;
-                            }
-                        }
                     }
                 }
             }
@@ -162,21 +167,19 @@
             hideLoader();
             let emptyFlag = true;
             for (var key in pastasDB) {
-                if (Object.prototype.hasOwnProperty.call(pastasDB, key)) {
-                    if (pastasDB[key].userId == currentUser.uid) {
-                        let article = document.createElement('article');
-                        article.classList.add('pasta');
-                        article.innerHTML = post(pastasDB, key);
-                        myPastaContainer.prepend(article);
-                        emptyFlag = false;
+                if (pastasDB[key].userId == currentUser.uid) {
+                    let article = document.createElement('article');
+                    article.classList.add('pasta');
+                    article.innerHTML = post(pastasDB, key);
+                    myPastaContainer.prepend(article);
+                    emptyFlag = false;
 
-                        article.querySelector('.delete-pasta').addEventListener('click', event => {
-                            const postId = event.target.getAttribute('data-id');
-                            pasta.delete(postId);
-                            document.getElementById('my-pastas').removeChild(event.target.parentNode.parentNode);
-                            event.preventDefault();
-                        })
-                    }
+                    article.querySelector('.delete-pasta').addEventListener('click', event => {
+                        const postId = event.target.getAttribute('data-id');
+                        pasta.delete(postId);
+                        document.getElementById('my-pastas').removeChild(event.target.parentNode.parentNode);
+                        event.preventDefault();
+                    })
                 }
             }
 
@@ -199,13 +202,11 @@
 
         article.querySelector('.fav-pasta').append(btn);
 
-        if (dbRef) {
-            if (Object.prototype.hasOwnProperty.call(dbRef, id)) {
-                btn.classList.add('fas');
-            }
-            else {
-                btn.classList.add('far');
-            }
+        if (Object.prototype.hasOwnProperty.call(dbRef, id)) {
+            btn.classList.add('fas');
+        }
+        else {
+            btn.classList.add('far');
         }
     }
 
