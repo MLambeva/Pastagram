@@ -388,7 +388,11 @@ span {
 
 .image-name:hover>span {
     position: absolute;
-    
+    animation: scroll-left 4s linear infinite;
+}
+
+.image-name:focus>span {
+    position: absolute;
     animation: scroll-left 4s linear infinite;
 }
 
