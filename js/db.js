@@ -6,9 +6,9 @@
         const firebaseConfig = {
             apiKey: "AIzaSyAaurpIbwspzgj841bfWhbU0cwCoTKA0JI",
             authDomain: "pastagram-a309c.firebaseapp.com",
-            databaseURL: "https://pastagram-a309c-default-rtdb.firebaseio.com/",
+            //databaseURL: "https://pastagram-a309c-default-rtdb.firebaseio.com/",
             projectId: "pastagram-a309c",
-            storageBucket: "", //"pastagram-a309c.appspot.com",
+            //storageBucket: "pastagram-a309c.appspot.com",
             messagingSenderId: "544116547888"
         };
         // Initialize Firebase
@@ -170,23 +170,27 @@
     };
 
     const favouritePasta = id => {
-        const db = firebase.database();
-        const currentUser = firebase.auth().currentUser;
-        const userId = currentUser.uid;
+        fetch("https://api.npoint.io/636409df8ded0c89c938").then(response => response.json()).then(db => {
+            const currentUser = firebase.auth().currentUser;
+            const userId = currentUser.uid;
+            db.users[userId].favourites[id] = 1;
 
-        const dbRef = db.ref('users/' + userId + '/favourites/' + id);
-
-        dbRef.push("1");
+            updateDB(db);
+        }).catch((err) => {
+            console.log(err);
+        });
     };
 
     const unfavouritePasta = id => {
-        const db = firebase.database();
-        const currentUser = firebase.auth().currentUser;
-        const userId = currentUser.uid;
+        fetch("https://api.npoint.io/636409df8ded0c89c938").then(response => response.json()).then(db => {
+            const currentUser = firebase.auth().currentUser;
+            const userId = currentUser.uid;
+            delete db.users[userId].favourites[id];
 
-        const dbRef = db.ref('users/' + userId + '/favourites/' + id);
-
-        dbRef.remove();
+            updateDB(db);
+        }).catch((err) => {
+            console.log(err);
+        });
     };
 
     this.auth = {

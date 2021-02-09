@@ -170,13 +170,13 @@
         });
     }
 
-    const createFavButton = (article, dbRef, data) => {
+    const createFavButton = (article, dbRef, id) => {
         let btn = document.createElement('button');
         btn.classList.add("fa-heart");
         btn.setAttribute('id', 'fav-button');
-        btn.setAttribute('data-id', data.key);
+        btn.setAttribute('data-id', id);
 
-        favButtonFunctionality(data, btn);
+        favButtonFunctionality(id, btn);
 
         article.querySelector('.fav-pasta').append(btn);
 
