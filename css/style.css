@@ -378,6 +378,10 @@ span {
     position: relative;
 }
 
+.image-name>span {
+    font-family: 'Unica One';
+}
+
 .image-name:hover {
     text-overflow: unset;
 }
@@ -385,26 +389,14 @@ span {
 .image-name:hover>span {
     position: absolute;
     
-    -moz-animation: scroll-left 4s linear infinite;
     animation: scroll-left 4s linear infinite;
-}
-
-@-moz-keyframes scroll-left {
-    0% {
-        -moz-transform: translateX(-30%);
-    }
-    100% {
-        -moz-transform: translateX(-200%);
-    }
 }
 
 @keyframes scroll-left {
     0% {
-        -moz-transform: translateX(-30%);
         transform: translateX(-30%);
     }
     100% {
-        -moz-transform: translateX(-200%);
         transform: translateX(-200%);
     }
 }
