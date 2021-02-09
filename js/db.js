@@ -107,65 +107,66 @@
         }
     }
 
+    const updateDB = db => {
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://api.npoint.io/636409df8ded0c89c938");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(db));
+    }
+
     const postPasta = (imageURL, imageName) => {
-        const db = firebase.database();
-        const pastaDbRef = db.ref('pastas/');
-        const currentUser = firebase.auth().currentUser;
-        const userDisplayName = currentUser ? currentUser.displayName : "";
-        const userId = currentUser ? currentUser.uid : "";
-        const userDbRef = currentUser ? db.ref('users/' + userId) : undefined;
+        fetch("https://api.npoint.io/636409df8ded0c89c938").then(response => response.json()).then(db => {
+            const pastaDbRef = db.pastas;
+            const currentUser = firebase.auth().currentUser;
+            const userDisplayName = currentUser.displayName;
+            const userId = currentUser.uid;
 
-        if (currentUser) {
-            if (validateURL(imageURL)) {
-                pastaDbRef.push({
-                    'username': userDisplayName,
-                    'userId': userId,
-                    'imageURL': imageURL,
-                    'imageName': imageName
-                });
+            if (!Object.prototype.hasOwnProperty.call(db.users, userId)) {
+                db.users[userId] = {
+                    "favourites": {},
+                    "pastas": 1
+                };
             }
 
-            if (userDbRef) {
-                userDbRef.once('value').then(snapshot => {
-                    if (snapshot.val()) {
-                        const pastas = parseInt(snapshot.val()['pastas']) + 1;
+            if (currentUser) {
+                if (validateURL(imageURL)) {
+                    pastaDbRef[db.count] = {
+                        'username': userDisplayName,
+                        'userId': userId,
+                        'imageURL': imageURL,
+                        'imageName': imageName
+                    };
+                    db.count = parseInt(db.count) + 1;
+                }
 
-                        userDbRef.update({
-                            pastas: pastas
-                        });
-                    } else {
-                        userDbRef.set({
-                            'pastas': '1'
-                        });
-                    }
-                });
+                parseInt(db.users[userId].pastas) + 1;
+
+                updateDB(db);
             }
-        }
-        else {
-            window.location = 'login.html?error=accessDenied';
-        }
+            else {
+                window.location = 'login.html?error=accessDenied';
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
     };
 
     const deletePasta = id => {
-        const db = firebase.database();
-        const dbRef = db.ref('pastas/' + id);
-        const currentUser = firebase.auth().currentUser;
-        const userId = currentUser.uid;
-        const userDbRef = currentUser ? db.ref('users/' + userId) : undefined;
+        fetch("https://api.npoint.io/636409df8ded0c89c938").then(response => response.json()).then(db => {
+            const currentUser = firebase.auth().currentUser;
+            const userId = currentUser.uid;
+            const userDbRef = db.users[userId];
 
-        if (userDbRef) {
-            userDbRef.once('value').then(snapshot => {
-                if (snapshot.val()) {
-                    const pastas = parseInt(snapshot.val()['pastas']) - 1;
+            if (userDbRef && parseInt(userDbRef.pastas) > 0) {
+                userDbRef.pastas = userDbRef.pastas - 1;
+            }
 
-                    userDbRef.update({
-                        pastas: pastas
-                    });
-                }
-            });
-        }
+            delete db.pastas[id];
 
-        dbRef.remove();
+            updateDB(db);
+        }).catch((err) => {
+            console.log(err);
+        });
     };
 
     const favouritePasta = id => {
@@ -200,4 +201,8 @@
         favourite: favouritePasta,
         unfavourite: unfavouritePasta
     };
+
+    this.database = {
+        update: updateDB
+    }
 })(this); 

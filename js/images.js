@@ -142,42 +142,52 @@
         });
     }
 
-    const populateMyUploads = () => pastasDB.on('child_added', data => {
-        hideLoader();
+    const populateMyUploads = () => {
+        fetch("https://api.npoint.io/636409df8ded0c89c938").then(response => response.json()).then(db => {
+            const pastasDB = db.pastas;
+            const currentUser = firebase.auth().currentUser;
+            hideLoader();
 
-        if (data.val().userId == firebase.auth().currentUser.uid) {
-            let article = document.createElement('article');
-            article.classList.add('pasta');
-            article.innerHTML = post(data);
-            myPastaContainer.prepend(article);
+            for (var key in pastasDB) {
+                if (Object.prototype.hasOwnProperty.call(pastasDB, key)) {
+                    if (pastasDB[key].userId == currentUser.uid) {
+                        let article = document.createElement('article');
+                        article.classList.add('pasta');
+                        article.innerHTML = post(pastasDB, key);
+                        myPastaContainer.prepend(article);
 
-            article.querySelector('.delete-pasta').addEventListener('click', event => {
-                const postId = event.target.getAttribute('data-id');
-                pasta.delete(postId);
-                document.getElementById('my-pastas').removeChild(event.target.parentNode.parentNode);
-                event.preventDefault();
-            })
-        }
-    });
+                        article.querySelector('.delete-pasta').addEventListener('click', event => {
+                            const postId = event.target.getAttribute('data-id');
+                            pasta.delete(postId);
+                            document.getElementById('my-pastas').removeChild(event.target.parentNode.parentNode);
+                            event.preventDefault();
+                        })
+                    }
+                }
+            }
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 
     const createFavButton = (article, dbRef, data) => {
         let btn = document.createElement('button');
-            btn.classList.add("fa-heart");
-            btn.setAttribute('id', 'fav-button');
-            btn.setAttribute('data-id', data.key);
+        btn.classList.add("fa-heart");
+        btn.setAttribute('id', 'fav-button');
+        btn.setAttribute('data-id', data.key);
 
-            favButtonFunctionality(data, btn);
+        favButtonFunctionality(data, btn);
 
-            article.querySelector('.fav-pasta').append(btn);
+        article.querySelector('.fav-pasta').append(btn);
 
-            if (dbRef) {
-                if (Object.prototype.hasOwnProperty.call(dbRef, id)) {
-                    btn.classList.add('fas');
-                }
-                else {
-                    btn.classList.add('far');
-                }
+        if (dbRef) {
+            if (Object.prototype.hasOwnProperty.call(dbRef, id)) {
+                btn.classList.add('fas');
             }
+            else {
+                btn.classList.add('far');
+            }
+        }
     }
 
     const favButtonFunctionality = (id, btn) => {
