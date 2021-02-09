@@ -58,7 +58,7 @@
             return `<div class="img-container">
                         <a href="${data.imageURL}"><img src="${data.imageURL}" class="pasta-image" /></a>
                     </div>
-                    <label class="image-name">${data.imageName}</label>
+                    <label class="image-name"><span>${data.imageName}</span></label>
                     <div class="delete-pasta">
                         <button class="delete-button" data-id="${key}">Del-Eat Pasta</button>
                     </div>`;
@@ -68,7 +68,7 @@
                         <a href="${data.imageURL}"><img src="${data.imageURL}" class="pasta-image" /></a>
                     </div>                    
                     <div class="fav-pasta">
-                        <label class="image-name">${data.imageName}</label>
+                        <label class="image-name"><span>${data.imageName}</span></label>
                     </div>`;
         }
     }
