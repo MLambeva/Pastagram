@@ -82,7 +82,7 @@
                 populateMyUploads();
             }
             else {
-                pleaseLogin(myPastaContainer, "uploads");
+                warning(myPastaContainer, "Please login to see your uploads!");
             }
         }
         else if (favPastaContainer) {
@@ -90,7 +90,7 @@
                 populate();
             }
             else {
-                pleaseLogin(favPastaContainer, "favourites");
+                warning(favPastaContainer, "Please login to see your favourites!");
             }
         }
     }
@@ -101,6 +101,7 @@
             const currentUser = firebase.auth().currentUser;
 
             hideLoader();
+            let emptyFlag = true;
             for (var key in pastasDB) {
                 if (Object.prototype.hasOwnProperty.call(pastasDB, key)) {
                     let article = document.createElement('article');
@@ -124,6 +125,7 @@
 
                     if (pastaContainer) {
                         pastaContainer.prepend(article);
+                        emptyFlag = false;
                     }
                     else {
                         const userId = currentUser.uid;
@@ -132,11 +134,22 @@
                         if (dbRef) {
                             if (Object.prototype.hasOwnProperty.call(dbRef, key)) {
                                 favPastaContainer.prepend(article);
+                                emptyFlag = false;
                             }
                         }
                     }
                 }
             }
+
+            if (emptyFlag) {
+                if (pastaContainer) {
+                    warning(pastaContainer, "All the pasta has been eaten!");
+                }
+                else {
+                    warning(favPastaContainer, "You have no favourite pasta!");
+                }
+            }
+
         }).catch((err) => {
             console.log(err);
         });
@@ -147,7 +160,7 @@
             const pastasDB = db.pastas;
             const currentUser = firebase.auth().currentUser;
             hideLoader();
-
+            let emptyFlag = true;
             for (var key in pastasDB) {
                 if (Object.prototype.hasOwnProperty.call(pastasDB, key)) {
                     if (pastasDB[key].userId == currentUser.uid) {
@@ -155,6 +168,7 @@
                         article.classList.add('pasta');
                         article.innerHTML = post(pastasDB, key);
                         myPastaContainer.prepend(article);
+                        emptyFlag = false;
 
                         article.querySelector('.delete-pasta').addEventListener('click', event => {
                             const postId = event.target.getAttribute('data-id');
@@ -165,6 +179,11 @@
                     }
                 }
             }
+
+            if (emptyFlag) {
+                warning(myPastaContainer, "You have no uploads!");
+            }
+
         }).catch((err) => {
             console.log(err);
         });
@@ -206,11 +225,11 @@
         });
     }
 
-    const pleaseLogin = (container, string) => {
+    const warning = (container, string) => {
         hideLoader();
         let label = document.createElement('label');
         label.classList.add('login-warning');
-        label.innerHTML = `Please log in to see your ${string}!`;
+        label.innerHTML = string;
         container.prepend(label);
     }
 

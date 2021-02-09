@@ -391,6 +391,10 @@ span {
     font-size: 1.4rem;
 }
 
+#fav-button:focus {
+    outline: none;
+}
+
 .delete-button {
     border-radius: 1rem;
     background-color: #FCFFEB;
