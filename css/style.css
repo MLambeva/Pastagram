@@ -235,29 +235,27 @@ span {
     background: #FFC26D;
 }
 
-.menu-item, .menu-link, .menu-button {
+.menu-button {
     font-weight: bold;
     height: 100%;
     background: #FFC26D;
-}
-
-.menu-link, .menu-button {
     text-decoration: none;
     font-size: 1.6rem;
     padding: 0.2em 0.4em 0.2em 0.4em;
     border: 0;
     border-right: 1px solid #E98B08;
     border-left: 1px solid #E98B08;
-}
-
-.menu-button {
     font-family: 'Unica One';
     background: #FFC26D;
 }
 
-.menu-button:hover, .menu-link:hover {
+.menu-button:hover{
     background: #FFAE3C;
     cursor: pointer;
+}
+
+.menu-button:focus{
+    outline: none;
 }
 
 @media only screen and (max-width: 890px) {
@@ -276,7 +274,7 @@ span {
 }
 
 @media only screen and (max-width: 639px) {
-    .menu-link, .menu-button {
+    .menu-button {
         font-size: 4vw;
     }
 }
@@ -285,7 +283,7 @@ span {
     .menu {
         height: 6vw;
     }
-    .menu-link, .menu-button {
+    .menu-button {
         font-size: 3.8vw;
     }
 }
@@ -294,7 +292,7 @@ span {
     .menu {
         height: 2rem;
     }
-    .menu-link, .menu-button {
+    .menu-button {
         font-size: 1rem;
     }
     .image-container {
@@ -309,7 +307,7 @@ span {
     .menu{
         height: auto;
     }
-    .menu-link, .menu-button{
+    .menu-button{
         font-size: 0.9rem;
     }
 }

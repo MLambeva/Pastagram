@@ -22,6 +22,23 @@
         }
     });
 
+    const indexPageBtn = document.getElementById('index-page-btn');
+    const myUploadsPageBtn = document.getElementById('my-uploads-page-btn');
+    const myFavPageBtn = document.getElementById('my-fav-page-btn');
+    const uploadPageBtn = document.getElementById('upload-page-btn');
+
+    const navBtnListener = (btn, page) => {
+        btn.addEventListener('click', event => {
+            window.location = page;
+            event.preventDefault();
+        });
+    }
+
+    navBtnListener(indexPageBtn, 'index.html');
+    navBtnListener(myUploadsPageBtn, 'my-uploads.html');
+    navBtnListener(myFavPageBtn, 'my-favourites.html');
+    navBtnListener(uploadPageBtn, 'upload.html');
+
     const createButton = (menu, id, text, page) => {
         let item = document.createElement('li');
         menu.appendChild(item);
