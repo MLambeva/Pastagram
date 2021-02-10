@@ -187,27 +187,6 @@ span {
 
 /*------------------------------------Main Pages-------------------------------------*/
 
-.main {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    min-height: 100%;
-}
-
-.canvas {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 80%;
-    min-height: 80%;
-    height: 90%;
-    background-color: #FCFFEB;
-}
-
-.page-title {
-    font-size: 2.5rem;
-}
-
 .menu {
     display: flex;
     justify-content: space-between;
@@ -216,14 +195,6 @@ span {
     padding: 0 2rem 0 2rem;
     height: 2.7rem;
     border-top: 2px solid #FFC778;
-}
-
-.menu-title {
-    display: none;
-    margin: 0;
-    text-decoration: none;
-    font-size: 2rem;
-    font-weight: bold;
 }
 
 .menu-items {
@@ -256,6 +227,27 @@ span {
 
 .menu-button:focus{
     outline: none;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+}
+
+.canvas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    min-height: 80%;
+    height: 90%;
+    background-color: #FCFFEB;
+}
+
+.page-title {
+    font-size: 2.5rem;
 }
 
 @media only screen and (max-width: 890px) {

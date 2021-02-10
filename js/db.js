@@ -93,20 +93,6 @@
         });
     };
 
-    const validateURL = imageURL => {
-        let extensions = /(\.jpg|\.jpeg|\.bmp|\.png)$/i;
-
-        if (extensions.exec(imageURL)) {
-            return true;
-        }
-        else {
-            const errors = document.getElementById('errors');
-            errors.classList.add('errors-visible');
-            errors.innerText = "URL is not an accepted image!";
-            return false;
-        }
-    }
-
     const updateDB = db => {
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "https://api.npoint.io/636409df8ded0c89c938");
@@ -118,25 +104,23 @@
         fetch("https://api.npoint.io/636409df8ded0c89c938").then(response => response.json()).then(db => {
             const pastaDbRef = db.pastas;
             const currentUser = firebase.auth().currentUser;
-            const userDisplayName = currentUser.displayName;
-            const userId = currentUser.uid;
-
-            if (!Object.prototype.hasOwnProperty.call(db.users, userId)) {
-                db.users[userId] = {
-                    "favourites": {}
-                };
-            }
+            const userDisplayName = currentUser ? currentUser.displayName : undefined;
+            const userId = currentUser ? currentUser.uid : undefined;
 
             if (currentUser) {
-                if (validateURL(imageURL)) {
-                    pastaDbRef[db.count] = {
-                        'username': userDisplayName,
-                        'userId': userId,
-                        'imageURL': imageURL,
-                        'imageName': imageName
+                if (!Object.prototype.hasOwnProperty.call(db.users, userId)) {
+                    db.users[userId] = {
+                        "favourites": {}
                     };
-                    db.count = parseInt(db.count) + 1;
                 }
+
+                pastaDbRef[db.count] = {
+                    'username': userDisplayName,
+                    'userId': userId,
+                    'imageURL': imageURL,
+                    'imageName': imageName
+                };
+                db.count = parseInt(db.count) + 1;
 
                 updateDB(db);
             }

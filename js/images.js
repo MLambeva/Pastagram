@@ -58,23 +58,29 @@
         uploadPasta.addEventListener('submit', event => {
             const URL = document.getElementById('image-URL');
             const name = document.getElementById('image-name');
-
-            if (URL.value && name.value) {
+            const errors = document.getElementById('errors');
+            
+            if (validateURL(URL.value) && name.value) {
                 pasta.post(URL.value, name.value);
-                const errors = document.getElementById('errors');
-                errors.classList.add('errors-visible');
                 errors.innerText = "Uploaded pasta!";
             }
-            else {
-                const errors = document.getElementById('errors');
-                errors.classList.add('errors-visible');
+            else if (!URL.value || !name.value) {
                 errors.innerText = "Please fill in both fields!";
+            }
+            else {
+                errors.innerText = "URL is not an accepted image!";
             }
             URL.value = '';
             name.value = '';
 
             event.preventDefault();
         });
+    }
+
+    const validateURL = imageURL => {
+        let extensions = /(\.jpg|\.jpeg|\.bmp|\.png)$/i;
+
+        return extensions.exec(imageURL);
     }
 
     const post = (pastasDB, key) => {
